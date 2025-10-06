@@ -1,0 +1,24 @@
+﻿@model List<LTWeb06.Models.HoaDon>
+
+<h2>Lịch sử mua hàng</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Mã HĐ</th>
+            <th>Ngày tạo</th>
+        </tr>
+        @foreach (var hd in Model)
+        {
+            <tr>
+                <td>@hd.MaHD</td>
+                <td>@hd.NgayTao.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Chưa có hóa đơn nào.</p>
+}

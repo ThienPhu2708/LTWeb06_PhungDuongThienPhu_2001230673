@@ -1,0 +1,85 @@
+﻿@* Khai báo Model cho danh sách Sản phẩm (kết quả tìm kiếm) *@
+@model List<LTWeb06.Models.SanPham>
+@{
+    ViewBag.Title = "Tìm Kiếm Sản Phẩm";
+}
+
+<style>
+    /* Thêm CSS cơ bản cho bảng và hình ảnh */
+    .table-sp th, .table-sp td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .table-sp {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .form-search {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<h2>TÌM KIẾM SẢN PHẨM</h2>
+
+@* Form tìm kiếm, dùng Html.BeginForm để gửi dữ liệu về Action TimKiemSanPham *@
+@using (Html.BeginForm("TimKiemSanPham", "Home", FormMethod.Get, new { @class = "form-search" }))
+{
+    @* TextBox có tên là "tuKhoa" để Controller có thể nhận giá trị này *@
+    <input type="text" name="tuKhoa" value="@ViewBag.TuKhoa" placeholder="Nhập tên sản phẩm..." style="padding: 5px; flex-grow: 1;" />
+    <button type="submit" class="btn btn-primary">SEARCH</button>
+}
+
+@* Bảng hiển thị kết quả tìm kiếm *@
+<table class="table-sp">
+    <thead>
+        <tr>
+            <th>Hình ảnh</th>
+            <th>Mã SP</th>
+            <th>Tên SP</th>
+            <th>Giá</th>
+            <th>Mô Tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @* Hiển thị hình ảnh 80x50, giả sử hình ảnh nằm trong thư mục Images/SP *@
+                        <img src="~Content/Images/@item.Hinh" alt="@item.TenSP" style="width:80px; height:50px; object-fit: cover;" />
+                    </td>
+                    <td>@item.MaSP</td>
+                    <td>@item.TenSP</td>
+                    <td>@item.DonGia.ToString("N0") VNĐ</td>
+                    <td>@item.GhiChu</td>
+                </tr>
+            }
+        }
+        else if (!string.IsNullOrEmpty(ViewBag.TuKhoa))
+        {
+            // Trường hợp có tìm kiếm nhưng không có kết quả
+            <tr>
+                <td colspan="7">Không tìm thấy sản phẩm nào với từ khóa: "@ViewBag.TuKhoa"</td>
+            </tr>
+        }
+        else
+        {
+            // Trường hợp mới vào trang (chưa tìm kiếm)
+            <tr>
+                <td colspan="7">Hãy nhập từ khóa để tìm kiếm sản phẩm.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p style="text-align: right; font-weight: bold; margin-top: 15px;">
+    Tổng số sản phẩm: @ViewBag.TongSo
+</p>

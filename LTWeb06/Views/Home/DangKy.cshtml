@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<h2>Đăng ký</h2>
+<form method="post">
+    <div class="form-group">
+        <label>Tên khách hàng</label>
+        <input name="TenKhachHang" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Số điện thoại</label>
+        <input name="SoDienThoai" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Mật khẩu</label>
+        <input name="MatKhau" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Đăng ký</button>
+</form>
+<a href="@Url.Action("DangNhap")">Đã có tài khoản? Đăng nhập</a>
