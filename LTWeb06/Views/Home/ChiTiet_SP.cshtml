@@ -1,33 +1,9 @@
-﻿@model LTWeb06.Models.SanPham
-
+﻿
 @{
     ViewBag.Title = "Chi tiết sản phẩm";
 }
 
-<style>
-    .chitiet-table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-    }
 
-        .chitiet-table th,
-        .chitiet-table td {
-            border: 1px solid #ccc;
-            padding: 8px 12px;
-            text-align: center;
-        }
-
-        .chitiet-table th {
-            background-color: #f5f5f5;
-        }
-
-    .chitiet-image {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-    }
-</style>
 
 <h2>@Model.TenSP</h2>
 
@@ -46,7 +22,7 @@
         <td>@Model.TenSP</td>
         <td>@String.Format("{0:N0} VNĐ", Model.DonGia)</td>
         <td>@Model.GhiChu</td>
-        <td><img src="@Model.Hinh" alt="@Model.TenSP" class="chitiet-image" /></td>
+        <td><img src="~/Content/Images/@Model.Hinh" alt="@Model.Hinh" class="chitiet-image" /></td>
     </tr>
 </table>
 

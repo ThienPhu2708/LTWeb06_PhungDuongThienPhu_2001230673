@@ -1,20 +1,454 @@
-﻿/* Set padding to keep content from hitting the edges */
-.body-content {
+﻿/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+nav ul li {
+   margin-left: 1.5rem;
+}
+nav ul li a {
+   color: white;
+   text-decoration: none;
+   font-weight: 500;
+   transition: color 0.3s;
+}
+nav ul li a:hover {
+  color: #3498db;
+
+}
+
+/*Button*/
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-login {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+    .btn-login:hover {
+        background-color: white;
+        color: #2c3e50;
+    }
+
+.btn-register {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #3498db;
+}
+
+    .btn-register:hover {
+        background-color: #2980b9;
+        border-color: #2980b9;
+    }
+
+/* Main Content Styles */
+main {
+    padding: 2rem 0;
+    min-height: calc(100vh - 160px);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+/*Card product*/
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+.card-img-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.card:hover .card-img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.card-text {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.card-button {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+    .card-button:hover {
+        background-color: #2980b9;
+    }
+
+/* Form Styles */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+.form-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.form-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .form-button:hover {
+        background-color: #2980b9;
+    }
+
+.form-footer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+    .form-footer a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+
+
+/* Product Detail Styles */
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+    .product-image img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.product-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.product-features {
+    margin-bottom: 1.5rem;
+}
+
+    .product-features ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+    }
+
+    .product-features li {
+        margin-bottom: 0.5rem;
+    }
+
+.product-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-buy {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-buy:hover {
+        background-color: #c0392b;
+    }
+
+
+
+/* ========== Chi tiết sản phẩm ========== */
+.chitiet-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .chitiet-table th,
+    .chitiet-table td {
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        text-align: center;
+    }
+
+    .chitiet-table th {
+        background-color: #f5f5f5;
+    }
+
+.chitiet-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+/*Phần tìm kiếm sản phẩm*/
+.table-sp th, .table-sp td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.table-sp {
+    border-collapse: collapse;
+    width: 100%;
     margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.form-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+
+
+
+/* Footer Styles */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 2rem 0;
 }
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
+}
+
+    .footer-section h3 {
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        color: #ecf0f1;
+        margin-bottom: 0.5rem;
+        display: block;
+        text-decoration: none;
+    }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1.5rem;
+}
+
+/* Page Templates */
+.page {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        nav ul li {
+            margin: 0.5rem;
+        }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .product-detail {
+        flex-direction: column;
+    }
+}
+
+

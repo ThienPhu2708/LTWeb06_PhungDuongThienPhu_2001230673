@@ -2,18 +2,33 @@
     ViewBag.Title = "Đăng nhập";
 }
 
-<h2>Đăng nhập</h2>
-<form method="post">
-    <div class="form-group">
-        <label>Số điện thoại</label>
-        <input name="SoDienThoai" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Mật khẩu</label>
-        <input name="MatKhau" type="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">Đăng nhập</button>
-</form>
-<p class="text-danger">@ViewBag.Error</p>
-<a href="@Url.Action("DangKy")">Chưa có tài khoản? Đăng ký</a>
+<main>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">Đăng Nhập</h2>
 
+            @if (ViewBag.Error != null)
+            {
+                <p style="color:red">@ViewBag.Error</p>
+            }
+
+            <form method="post" action="@Url.Action("DangNhap", "Home")">
+                <div class="form-group">
+                    <label for="TenKhachHang">Tên đăng nhập</label>
+                    <input type="text" id="TenKhachHang" name="TenKhachHang" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="MatKhau">Mật khẩu</label>
+                    <input type="password" id="MatKhau" name="MatKhau" required>
+                </div>
+
+                <button type="submit" class="form-button">Đăng Nhập</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Chưa có tài khoản? <a href="@Url.Action("DangKy", "Home")">Đăng ký ngay</a></p>
+            </div>
+        </div>
+    </div>
+</main>

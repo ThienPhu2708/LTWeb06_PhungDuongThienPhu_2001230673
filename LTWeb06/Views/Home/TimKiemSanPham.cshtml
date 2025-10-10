@@ -4,26 +4,6 @@
     ViewBag.Title = "Tìm Kiếm Sản Phẩm";
 }
 
-<style>
-    /* Thêm CSS cơ bản cho bảng và hình ảnh */
-    .table-sp th, .table-sp td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-    }
-
-    .table-sp {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    .form-search {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-</style>
 
 <h2>TÌM KIẾM SẢN PHẨM</h2>
 
@@ -54,7 +34,7 @@
                 <tr>
                     <td>
                         @* Hiển thị hình ảnh 80x50, giả sử hình ảnh nằm trong thư mục Images/SP *@
-                        <img src="~Content/Images/@item.Hinh" alt="@item.TenSP" style="width:80px; height:50px; object-fit: cover;" />
+                        <img src="~/Content/Images/@item.Hinh" alt="@item.TenSP"  />
                     </td>
                     <td>@item.MaSP</td>
                     <td>@item.TenSP</td>

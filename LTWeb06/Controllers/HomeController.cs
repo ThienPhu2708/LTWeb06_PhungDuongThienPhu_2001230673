@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,46 +12,50 @@ namespace LTWeb06.Controllers
         DuLieu csdl = new DuLieu();
 
 
-        //danh sach san pham theo loai
+        // ==========================
+        // 🔹 PHẦN SẢN PHẨM
+        // ==========================
+
+        // Hiển thị danh sách sản phẩm theo loại
         public ActionResult SanPham_Loai(string MaLoai)
         {
             ViewBag.dsLoai = csdl.dsLoai;
-
             List<SanPham> dsSP;
+
             if (string.IsNullOrEmpty(MaLoai))
             {
                 dsSP = csdl.dsSP;
                 ViewBag.TieuDe = "Tất cả sản phẩm";
             }
-
             else
             {
                 dsSP = csdl.SanPhamTheoLoai(MaLoai);
                 Loai loai = csdl.XemChiTiet_Loai(MaLoai);
                 ViewBag.TieuDe = "Sản phẩm loại: " + loai.TenLoai;
             }
+
             return View(dsSP);
         }
 
-        // chi tiet san pham
+        // Chi tiết sản phẩm
         public ActionResult ChiTiet_SP(string id)
         {
             if (string.IsNullOrEmpty(id))
-            {
                 return HttpNotFound();
-            }
 
             SanPham sp = csdl.XemChiTiet_SP(id);
             if (sp == null)
-            {
                 return HttpNotFound();
-            }
 
-            return View(sp); // trả về 1 sản phẩm
+            return View(sp);
         }
 
 
-        //đăng ký
+        // ==========================
+        // 🔹 PHẦN TÀI KHOẢN (ĐĂNG NHẬP / ĐĂNG KÝ)
+        // ==========================
+
+        // Đăng ký (chỉ hiển thị, không lưu database)
         [HttpGet]
         public ActionResult DangKy()
         {
@@ -63,18 +65,11 @@ namespace LTWeb06.Controllers
         [HttpPost]
         public ActionResult DangKy(string TenKhachHang, string SoDienThoai, string MatKhau)
         {
-            var kh = new KhachHang
-            {
-                MaKH = "KH" + (csdl.dsKH.Count() + 1).ToString("00"),
-                TenKH = TenKhachHang,
-                SDT = SoDienThoai,
-                MatKhau = MatKhau
-            };
-            csdl.dsKH.Add(kh);
-            return RedirectToAction("Login");
+            ViewBag.ThongBao = "Trang đăng ký chỉ mô phỏng, không lưu dữ liệu!";
+            return View();
         }
 
-
+        // Đăng nhập (chỉ kiểm tra dữ liệu có sẵn trong CSDL)
         [HttpGet]
         public ActionResult DangNhap()
         {
@@ -82,57 +77,53 @@ namespace LTWeb06.Controllers
         }
 
         [HttpPost]
-        public ActionResult DangNhap(string SoDienThoai, string MatKhau)
+        public ActionResult DangNhap(string TenKhachHang, string MatKhau)
         {
-            var kh = csdl.dsKH.FirstOrDefault(x => x.SDT == SoDienThoai && x.MatKhau == MatKhau);
+            var kh = csdl.dsKH.FirstOrDefault(x => x.TenKH == TenKhachHang && x.MatKhau == MatKhau);
 
             if (kh != null)
             {
                 Session["MaKH"] = kh.MaKH;
                 Session["TenKhachHang"] = kh.TenKH;
-
                 return RedirectToAction("SanPham_Loai");
             }
 
-            ViewBag.Error = "Sai số điện thoại hoặc mật khẩu!";
+            ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng!";
             return View();
         }
 
-
-
+        // Đăng xuất
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("DangNhap");
         }
 
 
+        // ==========================
+        // 🔹 PHẦN KHÁC (TÌM KIẾM, LỊCH SỬ)
+        // ==========================
+
         // Tìm kiếm sản phẩm
-        // Tham số tuKhoa sẽ nhận giá trị từ ô textbox trên View
         public ActionResult TimKiemSanPham(string tuKhoa)
         {
             List<SanPham> dsKetQua = new List<SanPham>();
-            ViewBag.TuKhoa = tuKhoa; // Lưu lại từ khóa để hiển thị trên ô input
+            ViewBag.TuKhoa = tuKhoa;
 
             if (!string.IsNullOrEmpty(tuKhoa))
             {
-                // Nếu có từ khóa, gọi hàm tìm kiếm trong Model
                 dsKetQua = csdl.TimKiemSanPham(tuKhoa);
                 ViewBag.TongSo = dsKetQua.Count;
             }
             else
             {
-                // Nếu không có từ khóa (lần đầu vào trang), danh sách rỗng
                 ViewBag.TongSo = 0;
             }
 
-            // Trả về danh sách kết quả tìm kiếm cho View
             return View(dsKetQua);
         }
 
-
-
-
+        // Lịch sử mua hàng (chỉ hiển thị nếu đã đăng nhập)
         public ActionResult LichSu()
         {
             if (Session["MaKH"] == null)
@@ -143,7 +134,5 @@ namespace LTWeb06.Controllers
 
             return View(dsHD);
         }
-
-
     }
 }
